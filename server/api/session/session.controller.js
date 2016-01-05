@@ -28,10 +28,10 @@ export function create(req, res) {
   User.findOne({username: req.body.username})
     .select('password')
     .exec(function(err, user) {
-      if (err) { return next(err); }
+      if (err) { return res.send(500); }
       if (!user) { return res.send(401); }
       bcrypt.compare(req.body.password, user.password, function(err, valid) {
-        if (err) { return next(err); }
+        if (err) { return res.send(500); }
         if (!valid) { return res.send(401); }
         var token = jwt.encode({username: user.username}, secretKey);
         res.json(token);

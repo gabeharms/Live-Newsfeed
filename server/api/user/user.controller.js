@@ -22,19 +22,14 @@ function handleError(res, statusCode) {
   };
 }
 
-function returnUser(res, statusCode) {
-  res.json(user);
-}
-
 
 // Gets a list of Posts
 export function find(req, res) {
-  var tocken = req.headers['x-auth'];
+  var token = req.headers['x-auth'];
   var auth = jwt.decode(token, secretKey);
-  User.findOne({username: auth.username})
-    .execAsync() // no 'Async' suffix for model statics except for execAsync() 
-    .then(returnUser(res))
-    .catch(handleError(res));
+  User.findOne({username: auth.username}, function(err, user) {
+    res.json(user);
+  })
 }
 
 // Creates a new Post in the DB
@@ -43,7 +38,7 @@ export function create(req, res) {
   bcrypt.hash(req.body.password, 10, function(err, hash) {
     user.password = hash;
     user.save(function(err) {
-      if (err) { throw next(err); }
+      if (err) { throw res.send(500); }
       res.send(201);
     });
   });
