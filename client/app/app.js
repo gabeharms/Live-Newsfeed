@@ -11,7 +11,23 @@ angular.module('newsfeedApp', [
 ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider
-      .otherwise('/');
+      .otherwise('/login');
 
     $locationProvider.html5Mode(true);
+
+    $stateProvider
+      .state('login', {
+        url: '/login',
+        templateUrl: 'app/login/login.html',
+        controller: 'LoginCtrl',
+        controllerAs: 'loginCtrl'
+      })
+
+      .state('posts', {
+        url: '/posts',
+        templateUrl: 'app/posts/posts.html',
+        controller: 'PostsCtrl',
+        controllerAs: 'postsCtrl'
+      })
+
   });
