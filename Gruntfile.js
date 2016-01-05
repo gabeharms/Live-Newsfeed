@@ -17,7 +17,6 @@ module.exports = function (grunt) {
     cdnify: 'grunt-google-cdn',
     protractor: 'grunt-protractor-runner',
     buildcontrol: 'grunt-build-control',
-    istanbul_check_coverage: 'grunt-mocha-istanbul',
     ngconstant: 'grunt-ng-constant'
   });
 
@@ -75,10 +74,6 @@ module.exports = function (grunt) {
       injectCss: {
         files: ['<%= yeoman.client %>/{app,components}/**/*.css'],
         tasks: ['injector:css']
-      },
-      mochaTest: {
-        files: ['<%= yeoman.server %>/**/*.{spec,integration}.js'],
-        tasks: ['env:test', 'mochaTest']
       },
       jsTest: {
         files: ['<%= yeoman.client %>/{app,components}/**/*.{spec,mock}.js'],
@@ -709,9 +704,7 @@ module.exports = function (grunt) {
     if (target === 'server') {
       return grunt.task.run([
         'env:all',
-        'env:test',
-        'mochaTest:unit',
-        'mochaTest:integration'
+        'env:test'
       ]);
     }
 
@@ -761,16 +754,14 @@ module.exports = function (grunt) {
       if (option === 'unit') {
         return grunt.task.run([
           'env:all',
-          'env:test',
-          'mocha_istanbul:unit'
+          'env:test'
         ]);
       }
 
       else if (option === 'integration') {
         return grunt.task.run([
           'env:all',
-          'env:test',
-          'mocha_istanbul:integration'
+          'env:test'
         ]);
       }
 
@@ -783,9 +774,7 @@ module.exports = function (grunt) {
       else {
         return grunt.task.run([
           'env:all',
-          'env:test',
-          'mocha_istanbul',
-          'istanbul_check_coverage'
+          'env:test'
         ]);
       }
 
