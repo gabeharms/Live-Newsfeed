@@ -7,7 +7,7 @@
 'use strict';
 
 import _ from 'lodash';
-import config from '../config/environment';
+import config from '../../config/environment';
 var User = require('./user.model');
 var jwt = require('jwt-simple');
 var bcrypt = require('bcrypt');

@@ -6,10 +6,10 @@
 'use strict';
 
 import _ from 'lodash';
-import config from '../config/environment';
+import config from '../../config/environment';
 var jwt = require('jwt-simple');
 var bcrypt = require('bcrypt');
-var User = require('./user.model');
+var User = require('../user/user.model');
 
 
 var secretKey = config.secrets.session;
