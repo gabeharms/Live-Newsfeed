@@ -6,27 +6,27 @@ class MainController {
 
   constructor($http, $scope, socket) {
     this.$http = $http;
-    this.awesomeThings = [];
+    this.posts = [];
 
-    $http.get('/api/things').then(response => {
-      this.awesomeThings = response.data;
-      socket.syncUpdates('thing', this.awesomeThings);
+    $http.get('/api/posts').then(response => {
+      this.posts = response.data;
+      socket.syncUpdates('post', this.posts);
     });
 
     $scope.$on('$destroy', function() {
-      socket.unsyncUpdates('thing');
+      socket.unsyncUpdates('post');
     });
   }
 
-  addThing() {
-    if (this.newThing) {
-      this.$http.post('/api/things', { name: this.newThing });
-      this.newThing = '';
+  addPost() {
+    if (this.postBody) {
+      this.$http.post('/api/posts', { username: 'Gabe Harms', body: this.postBody });
+      this.postBody = '';
     }
   }
 
-  deleteThing(thing) {
-    this.$http.delete('/api/things/' + thing._id);
+  deletePost(post) {
+    this.$http.delete('/api/posts/' + post._id);
   }
 }
 
