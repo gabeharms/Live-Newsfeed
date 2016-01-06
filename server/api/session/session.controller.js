@@ -33,7 +33,7 @@ export function create(req, res) {
       bcrypt.compare(req.body.password, user.password, function(err, valid) {
         if (err) { return res.send(500); }
         if (!valid) { return res.send(401); }
-        var token = jwt.encode({username: user.username}, secretKey);
+        var token = jwt.encode({username: req.body.username}, secretKey);
         res.json(token);
       });
   });

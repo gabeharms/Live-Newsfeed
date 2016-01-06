@@ -3,7 +3,7 @@
 angular.module('newsfeedApp')
   .service('loginManager', loginManager);
 
-function loginManager($q, $http) {
+function loginManager($q, $http, $state) {
 	/*jshint validthis: true */
 	var service = this;
 
@@ -22,7 +22,7 @@ function loginManager($q, $http) {
 	function _getUser() {
 		var deferred = $q.defer();
 
-		$http.get('api/user')
+		$http.get('api/user', {headers: {'X-Auth': service.token}})
 			.success(function(username) {
 				deferred.resolve(username);
 			})
@@ -51,9 +51,17 @@ function loginManager($q, $http) {
 	function _register(username, password) {
 		var deferred = $q.defer();
 
+		function _loginSuccess() {
+			$state.go('posts');
+			deferred.resolve();
+		}
+		function _loginFailure() {
+			deferred.reject()
+		}
+
 		$http.post('api/user', {username: username, password: password})
 			.success(function() {
-				service._login(username, password);
+				service.login(username, password).then(_loginSuccess, _loginFailure);
 			})
 			.error(function(data, status) {
 				deferred.reject(status);

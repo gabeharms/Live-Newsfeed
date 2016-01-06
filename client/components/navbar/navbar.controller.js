@@ -13,11 +13,18 @@ class NavbarController {
     'state': 'login'
   }];
 
+  currentUser = '';
+
   isCollapsed = true;
   //end-non-standard
 
-  constructor() {
-    }
+  constructor($rootScope, $scope, loginManager) {
+    $rootScope.$on('login', function(_) {
+      loginManager.getUser().then(function(user) {
+        $scope.currentUser = user.username;
+      })
+    });
+  }
 }
 
 angular.module('newsfeedApp')
