@@ -23,6 +23,13 @@ angular.module('newsfeedApp', [
         controllerAs: 'loginCtrl'
       })
 
+      .state('register', {
+        url: '/register',
+        templateUrl: 'app/register/register.html',
+        controller: 'RegisterCtrl',
+        controllerAs: 'registerCtrl'
+      })
+
       .state('posts', {
         url: '/posts',
         templateUrl: 'app/posts/posts.html',
