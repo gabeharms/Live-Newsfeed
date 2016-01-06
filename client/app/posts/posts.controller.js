@@ -10,14 +10,14 @@ function postsCtrl($scope, $rootScope, $http, $state, socket) {
 
   /** Controller Variables **/
   viewModel.posts = null;
-  viewModel.postBody - '';
+  viewModel.postBody = '';
 
   /** Controller Functions **/
   viewModel.addPost = _addPost;
   viewModel.deletePost = _deletePost;
 
 
-  _initController() 
+  _initController();
 
 
   /******** Implementation *******/

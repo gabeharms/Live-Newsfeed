@@ -9,7 +9,7 @@ angular.module('newsfeedApp', [
   'ui.router',
   'ui.bootstrap'
 ])
-  .config(function($urlRouterProvider, $locationProvider) {
+  .config(function($urlRouterProvider, $locationProvider, $stateProvider) {
     $urlRouterProvider
       .otherwise('/login');
 
@@ -28,6 +28,6 @@ angular.module('newsfeedApp', [
         templateUrl: 'app/posts/posts.html',
         controller: 'PostsCtrl',
         controllerAs: 'postsCtrl'
-      })
+      });
 
   });
