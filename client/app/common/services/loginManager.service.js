@@ -15,6 +15,7 @@ function loginManager($q, $http, $state) {
 	service.login = _login;
 	service.register = _register;
 	service.getUser = _getUser;
+	service.getToken = _getToken;
 
 
 	/****** Implementation ******/
@@ -56,7 +57,7 @@ function loginManager($q, $http, $state) {
 			deferred.resolve();
 		}
 		function _loginFailure() {
-			deferred.reject()
+			deferred.reject();
 		}
 
 		$http.post('api/user', {username: username, password: password})
@@ -68,6 +69,10 @@ function loginManager($q, $http, $state) {
 			});
 
 		return deferred.promise;
+	}
+
+	function _getToken() {
+		return service.token;
 	}
 	
 }

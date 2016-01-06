@@ -19,10 +19,10 @@ class NavbarController {
   //end-non-standard
 
   constructor($rootScope, $scope, loginManager) {
-    $rootScope.$on('login', function(_) {
+    $rootScope.$on('login', function() {
       loginManager.getUser().then(function(user) {
         $scope.currentUser = user.username;
-      })
+      });
     });
   }
 }

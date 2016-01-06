@@ -10,7 +10,12 @@
 'use strict';
 
 import _ from 'lodash';
+import config from '../../config/environment';
+var jwt = require('jwt-simple');
 var Post = require('./post.model');
+
+var secretKey = config.secrets.session;
+
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -77,6 +82,9 @@ export function show(req, res) {
 
 // Creates a new Post in the DB
 export function create(req, res) {
+  var token = req.headers['x-auth'];
+  var auth = jwt.decode(token, secretKey);
+  req.body.username = auth.username;
   Post.createAsync(req.body)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));

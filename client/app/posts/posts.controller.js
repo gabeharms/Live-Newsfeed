@@ -3,7 +3,7 @@
 angular.module('newsfeedApp')
   .controller('PostsCtrl', postsCtrl);
 
-function postsCtrl($scope, $rootScope, $http, $state, socket) {
+function postsCtrl($scope, $rootScope, $http, $state, socket, postsManager) {
   /*jshint validthis: true */
   var viewModel = this;
 
@@ -35,7 +35,7 @@ function postsCtrl($scope, $rootScope, $http, $state, socket) {
 
   function _addPost() {
     if (viewModel.postBody) {
-      $http.post('/api/posts', { username: 'Gabe Harms', body: viewModel.postBody });
+      postsManager.createPost(viewModel.postBody);  
       viewModel.postBody = '';
     }
   }
