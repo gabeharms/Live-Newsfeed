@@ -13,6 +13,7 @@ import _ from 'lodash';
 import config from '../../config/environment';
 var jwt = require('jwt-simple');
 var Post = require('./post.model');
+var User = require('../user/user.model');
 
 var secretKey = config.secrets.session;
 
@@ -66,7 +67,7 @@ function removeEntity(res) {
 
 // Gets a list of Posts
 export function index(req, res) {
-  Post.find().sort('-date')
+  Post.find().populate('user').sort('-date')
     .execAsync() // no 'Async' suffix for model statics except for execAsync() 
     .then(responseWithResult(res))
     .catch(handleError(res));
@@ -74,7 +75,7 @@ export function index(req, res) {
 
 // Gets a single Post from the DB
 export function show(req, res) {
-  Post.findByIdAsync(req.params.id)
+  Post.findById(req.params.id).populate('user').execAsync
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
     .catch(handleError(res));
@@ -84,10 +85,14 @@ export function show(req, res) {
 export function create(req, res) {
   var token = req.headers['x-auth'];
   var auth = jwt.decode(token, secretKey);
-  req.body.username = auth.username;
-  Post.createAsync(req.body)
-    .then(responseWithResult(res, 201))
-    .catch(handleError(res));
+  User.findOneAsync({username: auth.username})
+    .then(function(user) {
+      req.body.user = user;
+      Post.createAsync(req.body)
+        .then(responseWithResult(res, 201))
+        .catch(handleError(res));
+      
+  });
 }
 
 // Updates an existing Post in the DB

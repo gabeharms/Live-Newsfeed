@@ -3,7 +3,7 @@
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 
 var PostSchema = new mongoose.Schema({
-  username: String,
+  user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   body: String,
   date: {type: Date, required: true, default: Date.now}
 });

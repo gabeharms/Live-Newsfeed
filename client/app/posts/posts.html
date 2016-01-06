@@ -12,7 +12,7 @@
 </form>
 <ul class='posts list-group'>
   <li ng-repeat="post in postsCtrl.posts | orderBy:'-date'" class='list-group-item'>
-    <strong>@{{ post.username }}</strong>
+    <strong>@{{ post.user.username }}</strong>
     <span>{{ post.body }}</span>
   </li>
 </ul>
