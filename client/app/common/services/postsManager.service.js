@@ -21,7 +21,7 @@ function postsManager($q, $http, $state, loginManager) {
 
       $http({
       		url: '/api/posts',
-            method: "POST",
+            method: 'POST',
             data: {body: postBody },
             headers: {'X-Auth': loginManager.getToken()}
          })

@@ -13,6 +13,7 @@ function loginManager($q, $http, $state) {
 
 	/** Service Functions **/
 	service.login = _login;
+	service.logout = _logout;
 	service.register = _register;
 	service.getUser = _getUser;
 	service.getToken = _getToken;
@@ -47,6 +48,10 @@ function loginManager($q, $http, $state) {
 			});
 
 		return deferred.promise;
+	}
+
+	function _logout() {
+		service.token = '';
 	}
 
 	function _register(username, password) {

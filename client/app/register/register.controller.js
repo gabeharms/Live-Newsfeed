@@ -3,7 +3,7 @@
 angular.module('newsfeedApp')
   .controller('RegisterCtrl', registerCtrl);
 
-function registerCtrl($scope, $http, $state, loginManager) {
+function registerCtrl($rootScope, $scope, $http, $state, loginManager) {
   /*jshint validthis: true */
   var viewModel = this;
 
@@ -23,6 +23,7 @@ function registerCtrl($scope, $http, $state, loginManager) {
 
     function _registerSuccess() {
       viewModel.registerError = false;
+      $rootScope.$emit('login');
       $state.go('posts');
 
     }

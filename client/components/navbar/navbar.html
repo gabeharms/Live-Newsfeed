@@ -14,10 +14,13 @@
         <li ng-repeat="item in nav.menu" ui-sref-active="active">
             <a ui-sref="{{item.state}}">{{item.title}}</a>
         </li>
+        <li ng-if="nav.currentUser">
+            <a href="#" ng-click="nav.logout()">Log Out</a>
+        </li>
       </ul>
     </div>
-    <div ng-if="currentUser">
-      {{currentUser}} is logged in
+    <div ng-if="nav.currentUser">
+      {{nav.currentUser}} is logged in
     </div>
   </div>
 </div>
