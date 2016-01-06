@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('webappApp')
+angular.module('newsfeedApp')
   .service('loginManager', loginManager);
 
 function loginManager($q, $http) {
@@ -13,6 +13,7 @@ function loginManager($q, $http) {
 
 	/** Service Functions **/
 	service.login = _login;
+	service.register = _register;
 	service.getUser = _getUser;
 
 
@@ -39,6 +40,20 @@ function loginManager($q, $http) {
 			.success(function(token) {
 				service.token = token;
 				deferred.resolve(token);
+			})
+			.error(function(data, status) {
+				deferred.reject(status);
+			});
+
+		return deferred.promise;
+	}
+
+	function _register(username, password) {
+		var deferred = $q.defer();
+
+		$http.post('api/user', {username: username, password: password})
+			.success(function() {
+				service._login(username, password);
 			})
 			.error(function(data, status) {
 				deferred.reject(status);

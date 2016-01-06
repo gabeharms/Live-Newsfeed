@@ -3,12 +3,15 @@
 angular.module('newsfeedApp')
   .controller('RegisterCtrl', registerCtrl);
 
-function registerCtrl($scope, $http, $state) {
+function registerCtrl($scope, $http, $state, loginManager) {
   /*jshint validthis: true */
   var viewModel = this;
 
 
   /** Controller Variables **/
+  viewModel.username = '';
+  viewModel.password = '';
+  viewModel.registerError = false;
 
   /** Controller Functions **/
   viewModel.register = _register;
@@ -17,7 +20,17 @@ function registerCtrl($scope, $http, $state) {
   /****** Implementation ******/
 
   function _register() {
-    $state.go('posts');
+
+    function _registerSuccess() {
+      viewModel.registerError = false;
+      $state.go('posts');
+
+    }
+    function _registerFailure() {
+      viewModel.registerError = true;
+    }
+
+    loginManager.register(viewModel.username, viewModel.password).then(_registerSuccess, _registerFailure);
   }
 
 }

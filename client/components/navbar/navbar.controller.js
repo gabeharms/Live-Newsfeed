@@ -3,7 +3,7 @@
 class NavbarController {
   //start-non-standard
   menu = [{
-    'title': 'posts',
+    'title': 'Posts',
     'state': 'posts'
   }, {
     'title': 'Register',
