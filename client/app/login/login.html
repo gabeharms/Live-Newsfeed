@@ -1,21 +1,24 @@
 <div class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-   TSA<b>OIT</b>
+   Login as an existing user
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
    
     <form>
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="User">
+        <input type="text" ng-model="loginCtrl.username" class="form-control" placeholder="User">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" ng-model="loginCtrl.password" class="form-control" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
+        <div ng-show="loginCtrl.loginError">
+          Invalid Username/Password
+        </div>
 
         <div class="col-xs-12 text-center">
           <button ng-click="loginCtrl.login()" class="btn btn-primary btn-block btn-flat">Sign In</button>

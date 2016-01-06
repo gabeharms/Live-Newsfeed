@@ -3,12 +3,15 @@
 angular.module('newsfeedApp')
   .controller('LoginCtrl', loginCtrl);
 
-function loginCtrl($scope, $http, $state) {
+function loginCtrl($scope, $http, $state, loginManager) {
   /*jshint validthis: true */
   var viewModel = this;
 
 
   /** Controller Variables **/
+  viewModel.username = '';
+  viewModel.password = '';
+  viewModel.loginError = false;
 
   /** Controller Functions **/
   viewModel.login = _login;
@@ -17,7 +20,17 @@ function loginCtrl($scope, $http, $state) {
   /****** Implementation ******/
 
   function _login() {
-    $state.go('posts');
+
+    function _loginSuccess() {
+      viewModel.loginError = false;
+      $state.go('posts');
+    }
+
+    function _loginFailure() {
+      viewModel.loginError = true;
+    }
+
+    loginManager.login(viewModel.username, viewModel.password).then(_loginSuccess, _loginFailure);
   }
 
 }
