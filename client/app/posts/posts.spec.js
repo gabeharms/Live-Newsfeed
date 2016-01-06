@@ -20,7 +20,7 @@ describe('Controller: MainController', function() {
 
     scope = $rootScope.$new();
     state = $state;
-    PostsController = $controller('PostsController', {
+    PostsController = $controller('PostsCtrl', {
       $scope: scope
     });
   }));
