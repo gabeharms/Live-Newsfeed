@@ -1,8 +1,17 @@
-# newsfeed
+## Live Newsfeed
 
-This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 3.2.0.
+This is a MEAN stack web app that mocks twitter, providing functionality to:
+* Create New Users
+* Login as an Existing User
+* View posts of all users
+* Create a post as a specific user
+* Live update the post newsfeed instantaneously when another user creates a post
 
-## Getting Started
+### Techologies Leverged
+* Hashing passwords that are stored into Mongo using Bcrypt
+* Creating user login sessions via JWT tokens
+* Asynchronous Angular calls fetching data from APIs
+* Using socket.io and events to live update client side data
 
 ### Prerequisites
 
