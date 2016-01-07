@@ -12,6 +12,7 @@ This is a MEAN stack web app that mocks twitter, providing functionality to:
 * Creating user login sessions via JWT tokens
 * Asynchronous Angular calls fetching data from APIs
 * Using socket.io and events to live update client side data
+* Creating Mongoose Schemas based on ObjectIDs, and populating in APIs
 
 ### Prerequisites
 
