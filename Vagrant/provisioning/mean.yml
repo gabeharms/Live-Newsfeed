@@ -1,0 +1,11 @@
+---
+- hosts: all
+  sudo: yes
+  tasks:
+    - name: ensure packages required are installed
+      yum: pkg={{item}} state=latest
+      with_items:
+        - nodejs
+        - mongodb
+        - gcc-c++ 
+        - make
