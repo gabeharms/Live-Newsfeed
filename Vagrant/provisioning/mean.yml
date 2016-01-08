@@ -1,11 +1,42 @@
 ---
 - hosts: all
-  sudo: yes
   tasks:
+    - name: Configure MongoDB Repo
+      sudo: yes
+      shell: cp /home/vagrant/sync/Vagrant/mongo/mongodb.repo /etc/yum.repos.d/
+    - name: Setup Node
+      sudo: yes
+      shell: curl -sL https://rpm.nodesource.com/setup_5.x | bash -
     - name: ensure packages required are installed
+      sudo: yes
       yum: pkg={{item}} state=latest
       with_items:
-        - nodejs
-        - mongodb
         - gcc-c++ 
         - make
+        - bzip2
+        - ruby
+        - git
+        - fontconfig-2.10.95-7.el7.x86_64
+        - krb5-devel
+        - mongodb-org
+        - mongodb-org-server
+        - nodejs
+    - name: Create MongoDB Directory
+      sudo: yes
+      shell: mkdir -p /data/db
+    - name: Change MongoDB Directory Permissions
+      sudo: yes
+      shell: chown -R vagrant:vagrant /data
+    - name: Install Grunt / Bower
+      sudo: yes
+      ignore_errors: yes
+      shell: (cd ~/sync/; npm install -g grunt-cli bower)
+    - name: Install Node Modules
+      sudo: yes
+      shell: (cd /home/vagrant/sync/; npm install)
+    - name: Install Bower Components
+      sudo: no
+      shell: (cd ~/sync/; bower install)
+    - name: Install Sass
+      sudo: yes
+      shell: gem install sass

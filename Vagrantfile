@@ -5,8 +5,8 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "CentOS-6.4-x86_64"
-  config.vm.box_url = "https://dl.dropboxusercontent.com/u/3318148/vagrant/CentOS-6.4-x86_64-v2.box"
+  config.vm.box = "CentOS-7-x86_64"
+  config.vm.box_url = "http://cloud.centos.org/centos/7/vagrant/x86_64/images/CentOS-7-Vagrant-1505-x86_64-01.box"
 
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--memory", "1024"]
@@ -18,6 +18,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ansible.playbook = "vagrant/provisioning/mean.yml"
   end
 
-  config.vm.network "forwarded_port", guest: 8080, host: 8080, auto_correct: true
-  config.vm.network "forwarded_port", guest: 1521, host: 1521, auto_correct: true
+  config.vm.network "forwarded_port", guest: 9000, host: 9000, auto_correct: true
 end
