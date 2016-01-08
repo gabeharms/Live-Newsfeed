@@ -22,8 +22,18 @@ This is a MEAN stack web app that mocks twitter, providing functionality to:
 - [Ruby](https://www.ruby-lang.org) and then `gem install sass`
 - [Grunt](http://gruntjs.com/) (`npm install --global grunt-cli`)
 - [MongoDB](https://www.mongodb.org/) - Keep a running daemon with `mongod`
+- Vagrant
 
-### Developing
+### Developing (With Vagrant)
+
+1. Run 'vagrant up --provider=virtualbox'
+
+2. Run 'mongod'
+
+3. Run 'grunt serve' (ready to go)
+
+
+### Developing (Without Vagrant)
 
 1. Run `npm install` to install server dependencies.
 
